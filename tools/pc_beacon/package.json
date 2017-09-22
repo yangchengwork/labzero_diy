@@ -4,7 +4,7 @@
   "description": "usr PC bluetooth test beacon",
   "main": "main.js",
   "scripts": {
-    "test": "node main.js"
+    "test": "sudo node main.js"
   },
   "keywords": [
     "beacon",
