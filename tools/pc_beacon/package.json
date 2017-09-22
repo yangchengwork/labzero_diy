@@ -1,0 +1,18 @@
+{
+  "name": "pc_beacon",
+  "version": "0.0.1",
+  "description": "usr PC bluetooth test beacon",
+  "main": "main.js",
+  "scripts": {
+    "test": "sudo node main.js"
+  },
+  "keywords": [
+    "beacon",
+    "bleno"
+  ],
+  "author": "Gump Yang",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "bleno": "^0.4.2"
+  }
+}
