@@ -9,6 +9,6 @@
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
-    <text class="user-motto">{{ibeacon}}</text>
+    <button bindtap='scanBeacon'>搜索</button>
   </view>
 </view>

@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+
+var beaconUUID = "e2c56db5-dffb-48d2-b060-d0f5a71096e0";
 
 Page({
   data: {
@@ -20,26 +22,8 @@ Page({
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        ibeacon: 'gump test1',
         hasUserInfo: true
       });
-      wx.onBeaconServiceChange(function(res){
-        console.log("service", res.available, res.discovering);
-      });
-      wx.startBeaconDiscovery({
-        uuids: ["e2c56db5-dffb-48d2-b060-d0f5a71096e0"],
-        success(res) {
-          console.log("gump ibeacon", res);
-          wx.getBeacons({
-            success(res) {
-              console.log('beacons:', JSON.stringify(res.beacons), res.beacons[0], res.errMsg);
-            }
-          });
-          wx.onBeaconUpdate(function(res){
-            console.log("update", res.beacons);
-          });
-        }
-      })
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -61,6 +45,26 @@ Page({
         }
       })
     }
+  },
+  scanBeacon: function scanBeacon(e) {
+    this.setData({
+      motto: "开始扫描"
+    });
+    var that = this;
+    wx.startBeaconDiscovery({
+      uuids: [beaconUUID],
+      success(res) {
+        console.log("gump ibeacon", res);
+        wx.getBeacons({
+          success(res) {
+            console.log('beacons:', JSON.stringify(res.beacons), res.beacons[0], res.errMsg);
+          }
+        });
+        wx.onBeaconUpdate(function (res) {
+          console.log("update", res.beacons);
+        });
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
