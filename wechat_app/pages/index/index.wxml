@@ -1,15 +1,14 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-    <button bindtap='scanBeacon'>搜索</button>
-    <rich-text>{{beaconData}}</rich-text>
-  </view>
+<view class="root">
+    <view class="line">
+        <text>欢迎你，{{nickname}}</text>
+        <view bindtap="openBeacon" class="demo">
+            {{beaconState}}
+            <view class="link">详情 ></view>
+        </view>
+        <!-- <view bindtap="openChat" class="demo">
+            聊天室
+            <view class="link">进入 ></view>
+        </view> -->
+        <view class='demo'>{{searchingState}}</view>
+    </view>
 </view>
