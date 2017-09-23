@@ -10,5 +10,9 @@
             <view class="link">进入 ></view>
         </view> -->
         <view class='demo'>{{searchingState}}</view>
+
+        <view class='demo' wx:for="{{allBeacons}}" wx:for-key="key" wx:for-item="beacon">
+            {{beacon.minor}}, {{beacon.accuracy}}
+        </view>
     </view>
 </view>

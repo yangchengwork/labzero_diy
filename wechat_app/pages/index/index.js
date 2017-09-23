@@ -16,6 +16,7 @@ Page({
     nickname: '客人',
     beaconState: '未开始搜索',
     searchingState: '扫描中...',
+    allBeacons:[]
   },
   onLoad: function () {
       this.scanBeacon()
@@ -36,9 +37,14 @@ Page({
                       let nearest = 0
                       let accur = 9999
                       let room = '未知'
+                      that.setData({allBeacons: beacons})
                       beacons.forEach((b) => {
+                          if (b.accuracy < 0) {
+                            return;
+                          }
                           if (b.accuracy < accur && rooms[b.minor] != undefined) {
                               nearest = b.minor
+                              accur = b.accuracy
                               room = rooms[nearest]
                           }
                       })
