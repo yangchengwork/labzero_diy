@@ -46,6 +46,13 @@ Page({
       })
     }
   },
+  readBeaconData: function(beacons) {
+    var num = beacons.length;
+    var strNumber = "共找到:" + num.toString() + "个";
+    this.setData({
+      motto: "共找到:" + strNumber
+    });
+  },
   scanBeacon: function scanBeacon(e) {
     this.setData({
       motto: "开始扫描"
@@ -61,7 +68,8 @@ Page({
           }
         });
         wx.onBeaconUpdate(function (res) {
-          console.log("update", res.beacons);
+          // console.log("update", res.beacons);
+          that.readBeaconData(res.beacons);
         });
       }
     })
