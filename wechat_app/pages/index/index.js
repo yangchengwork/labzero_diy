@@ -57,6 +57,7 @@ Page({
       motto: "共找到:" + strNumber,
       beaconData: strData
     });
+    console.log("data:", beacons);
   },
   scanBeacon: function scanBeacon(e) {
     this.setData({
