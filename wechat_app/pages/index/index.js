@@ -2,12 +2,12 @@
 //获取应用实例
 const app = getApp();
 
-var beaconUUID = "e2c56db5-dffb-48d2-b060-d0f5a71096e0";
+var beaconUUID = "01122334-4556-6778-899a-abbccddeeff0"; // "e2c56db5-dffb-48d2-b060-d0f5a71096e0";
 
 Page({
   data: {
     motto: 'Hello World',
-    ibeacon: 'gump',
+    beaconData: '',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -49,8 +49,13 @@ Page({
   readBeaconData: function(beacons) {
     var num = beacons.length;
     var strNumber = "共找到:" + num.toString() + "个";
+    var strData = "得到数据";
+    for (var i=0; i<num; i++) {
+      strData += "\r\nID:" + beacons[i].minor.toString() +  " 距离:" + beacons[i].accuracy.toString() + " RSSI:" + beacons[i].rssi.toString();
+    }
     this.setData({
-      motto: "共找到:" + strNumber
+      motto: "共找到:" + strNumber,
+      beaconData: strData
     });
   },
   scanBeacon: function scanBeacon(e) {

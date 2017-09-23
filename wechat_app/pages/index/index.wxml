@@ -10,5 +10,6 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
     <button bindtap='scanBeacon'>搜索</button>
+    <rich-text>{{beaconData}}</rich-text>
   </view>
 </view>
