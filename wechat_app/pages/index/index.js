@@ -4,87 +4,65 @@ const app = getApp();
 
 var beaconUUID = "01122334-4556-6778-899a-abbccddeeff0"; // "e2c56db5-dffb-48d2-b060-d0f5a71096e0";
 
+var rooms = {
+    1: '会议室',
+    2: '大厅',
+    3: '办公室一',
+    4: '办公室二'
+}
+
 Page({
   data: {
-    motto: 'Hello World',
-    beaconData: '',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    nickname: '客人',
+    beaconState: '未开始搜索',
+    searchingState: '扫描中...',
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      });
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+      this.scanBeacon()
   },
-  readBeaconData: function(beacons) {
-    var num = beacons.length;
-    var strNumber = "共找到:" + num.toString() + "个";
-    var strData = "得到数据";
-    for (var i=0; i<num; i++) {
-      strData += "\r\nID:" + beacons[i].minor.toString() +  " 距离:" + beacons[i].accuracy.toString() + " RSSI:" + beacons[i].rssi.toString();
-    }
-    this.setData({
-      motto: "共找到:" + strNumber,
-      beaconData: strData
-    });
-  },
-  scanBeacon: function scanBeacon(e) {
-    this.setData({
-      motto: "开始扫描"
-    });
-    var that = this;
-    wx.startBeaconDiscovery({
-      uuids: [beaconUUID],
-      success(res) {
-        console.log("gump ibeacon", res);
-        wx.getBeacons({
+
+  scanBeacon() {
+      this.setData({ beaconState: '开始搜索Beacon...' })
+      let that = this
+      wx.startBeaconDiscovery({
+          uuids: [beaconUUID],
           success(res) {
-            console.log('beacons:', JSON.stringify(res.beacons), res.beacons[0], res.errMsg);
+              console.log('startBeaconDiscovery success')
+              wx.onBeaconUpdate((res) => {
+                  let beacons = res.beacons
+                  let text = '未找到设备'
+                  that.loadingState()
+                  if (beacons.length > 0) {
+                      let nearest = 0
+                      let accur = 9999
+                      let room = '未知'
+                      beacons.forEach((b) => {
+                          if (b.accuracy < accur && rooms[b.minor] != undefined) {
+                              nearest = b.minor
+                              room = rooms[nearest]
+                          }
+                      })
+                      text = '当前位置：' + room
+                  }
+                  console.log('beacon count=' + beacons.length, beacons)
+                  that.setData({ beaconState: text })
+              })
           }
-        });
-        wx.onBeaconUpdate(function (res) {
-          // console.log("update", res.beacons);
-          that.readBeaconData(res.beacons);
-        });
-      }
-    })
+      })
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+
+  currentState: 1,
+  loadingState() {
+      let subfix = '.'.repeat(this.currentState)
+      this.setData({ searchingState: '扫描中' + subfix })
+      this.currentState++
+      if (this.currentState > 5) {
+          this.currentState = 1;
+      }
+  },
+  onHide() {
+      wx.stopBeaconDiscovery({
+          uuids: [beaconUUID],
+      })
   }
 })
