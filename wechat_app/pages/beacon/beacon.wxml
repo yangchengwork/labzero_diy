@@ -1,0 +1,17 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">LabZero Beacon</view>
+        <view class="page__desc">{{beaconState}}</view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="kind-list">
+            <block wx:for="{{allBeacons}}" wx:key="id">
+                <view class="kind-list__item">
+                    <view id="{{item.minor}}" class="weui-flex kind-list__item-hd">
+                        <view class="weui-flex__item">{{item.name}}: {{item.accuracy}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
