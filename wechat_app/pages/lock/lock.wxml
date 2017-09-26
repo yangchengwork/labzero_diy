@@ -1,0 +1,22 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">LabZero Lock</view>
+        <view class="page__desc">Join LabZero now, you can access the lock key here.</view>
+        <view wx:if="{{user.openId}}">
+            <view class="page__desc">User: {{user.nickName}}</view>
+            <view class="page__desc">
+                openId: {{user.openId}}
+                <button class="weui-btn mini-btn" data-openid='{{user.openId}}' type="primary" size="mini" bindtap='copyID'>Copy & send to admin</button>
+            </view>
+        </view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <block>
+            <view class="kind-list__item">
+                <view id="{{item.minor}}" class="weui-flex kind-list__item-hd">
+                    <view class="lock-display">{{doorKey}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,21 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__desc">零空间是非营利创客社区。没有老板。如果你想要帮助我们维持空间的运作，欢迎加入我们。</view>
+        <view class="page__desc">LAB ZERO is non-profit makers community. There's no boss. If want to help us keep the space running, just join us.</view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+        <view class="kind-list">
+            <block wx:for="{{list}}" wx:key="id">
+                <view class="kind-list__item">
+                    <view id="{{item.id}}" class="weui-flex kind-list__item-hd" bindtap='gotoPage'>
+                        <view class="weui-flex__item">{{item.name}}</view>
+                        <image class="kind-list__img" src="images/icon_nav_{{item.id}}.png"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="page__ft">
+        <image src="images/labzero.png" style="width: 84px; height: 84px;"></image>
+    </view>
+</view>

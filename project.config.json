@@ -1,0 +1,6 @@
+{
+	"client": "./wechat_app",
+	"svr": "./server",
+	"appid": "wx171f6c252030fb94",
+	"projectname": "LabZero"
+}
