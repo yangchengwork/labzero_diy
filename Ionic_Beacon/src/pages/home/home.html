@@ -13,16 +13,12 @@
     <ion-item *ngFor="let beacon of beacons">
       <ion-grid>
         <ion-row>
-          <ion-col>Major</ion-col>
-          <ion-col>{{beacon.major}}</ion-col>
-        </ion-row>
-        <ion-row>
           <ion-col>Minor</ion-col>
           <ion-col>{{beacon.minor}}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>RSSI</ion-col>
-          <ion-col>{{beacon.rssi}}</ion-col>
+          <ion-col>Accuracy</ion-col>
+          <ion-col>{{beacon.accuracy}}</ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>

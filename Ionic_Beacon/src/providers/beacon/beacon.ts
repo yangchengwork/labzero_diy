@@ -40,7 +40,7 @@ export class BeaconProvider {
       );
       
       // setup a beacon region – CHANGE THIS TO YOUR OWN UUID
-      this.region = this.ibeacon.BeaconRegion('deskBeacon', 'F7826DA6-4FA2-4E98-8024-BC5B71E0893E');
+      this.region = this.ibeacon.BeaconRegion('deskBeacon', '01122334-4556-6778-899a-abbccddeeff0');
       
       // start ranging
       this.ibeacon.startRangingBeaconsInRegion(this.region)
