@@ -15,6 +15,8 @@ var app = (function()
 		{uuid:'E20A39F4-73F5-4BC4-A12F-17D1AD07A961'},
 		{uuid:'A4950001-C5B1-4B44-B512-1370F02D74DE'},
 		{uuid:'585CDE93-1B01-42CC-9A13-25009BEDC65E'},	// Dialog Semiconductor.
+		// SZDIY test
+		{uuid:'01122334-4556-6778-899a-abbccddeeff0'},
 	];
 
 	// Background detection.
